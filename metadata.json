@@ -1,0 +1,7 @@
+{
+  "name": "Roomzy",
+  "description": "Find your perfect room with AI matching, real-time chat, and comprehensive rental tools.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
