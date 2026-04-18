@@ -80,11 +80,9 @@ async function startServer() {
   if (isProduction) {
     // Serve built static files
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    // SPA fallback — all unmatched routes serve index.html
-    app.get("*", (_req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
+    app.get("/", (req, res) => {
+  res.send("Roomzy API running 🚀");
+});
   } else {
     // Vite dev middleware
     const vite = await createViteServer({
