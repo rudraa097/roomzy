@@ -22,18 +22,15 @@
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "lucide-react": "^0.546.0",
-    "mapbox-gl": "^3.21.0",
     "motion": "^12.23.24",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-  
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "stripe": "^22.0.1",
     "vite": "^6.2.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/mapbox-gl": "^3.4.1",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
     "tailwindcss": "^4.1.14",
