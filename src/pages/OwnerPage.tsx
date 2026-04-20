@@ -9,7 +9,7 @@ import {
   Camera, CheckCircle2, Clock, Wallet, User, Image as ImageIcon,
   ArrowLeft, Map as MapIcon, Wand2, Shield, AlertTriangle, Lock, Building2, Flame
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { optimizeListing } from '../services/geminiService';
 import { calculateSafetyScore } from '../lib/safetyScore';
 
