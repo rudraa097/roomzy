@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ShieldAlert, AlertTriangle, CheckCircle2, Search } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Tag } from '../components/Tag';
 
 interface ScamPageProps {
