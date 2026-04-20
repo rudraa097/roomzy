@@ -5,7 +5,7 @@ import {
   CreditCard, Smartphone, QrCode, Check, 
   ArrowRight, ShieldCheck, Wallet 
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface PaymentModalProps {
   show: boolean;
