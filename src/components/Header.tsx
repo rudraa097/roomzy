@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Home, MessageSquare, Bell, Search, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeaderProps {
   onNav: (page: string) => void;
