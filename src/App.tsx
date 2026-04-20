@@ -6,8 +6,7 @@ import { Header } from './components/Header';
 import { BottomNav } from './components/BottomNav';
 import { Toast } from './components/Toast';
 
-// Pages
-import { MapPage } from './pages/MapPage';
+// Pages (MapPage removed)
 import { RoomsPage } from './pages/RoomsPage';
 import { DetailPage } from './pages/DetailPage';
 import { ChatPage } from './pages/ChatPage';
@@ -50,7 +49,7 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('is_logged_in', isLoggedIn.toString());
   }, [isLoggedIn]);
-  
+
   const [maintenanceRequests, setMaintenanceRequests] = useState<any[]>([
     { id: 1, room: "B-402", issue: "Leaking Tap", priority: "Medium", status: "New", date: "12 Apr", tenantName: "Rahul Kapoor" },
     { id: 2, room: "A-105", issue: "AC Not Cooling", priority: "High", status: "In Progress", date: "10 Apr", tenantName: "Amit Sharma" },
@@ -78,19 +77,14 @@ export default function App() {
       showToast("Payment successful! 🎊");
       if (roomId) {
         const room = rooms.find(r => r.id === Number(roomId));
-        if (room) {
-          onNav("detail", room);
-        }
+        if (room) onNav("detail", room);
       }
-      // Clear URL params
       window.history.replaceState({}, document.title, "/");
     } else if (paymentStatus === "cancel") {
       showToast("Payment cancelled.");
       if (roomId) {
         const room = rooms.find(r => r.id === Number(roomId));
-        if (room) {
-          onNav("detail", room);
-        }
+        if (room) onNav("detail", room);
       }
       window.history.replaceState({}, document.title, "/");
     }
@@ -147,15 +141,21 @@ export default function App() {
     setActiveTab(prev);
   };
 
-  const isSubPage = ["detail", "chat", "matcher", "neighbourhood", "checklist", "receipts", "agreement", "rewards", "scam", "pricing", "about", "contact", "privacy", "terms", "owner", "admin"].includes(page);
+  const isSubPage = [
+    "detail", "chat", "matcher", "neighbourhood",
+    "checklist", "receipts", "agreement",
+    "rewards", "scam", "pricing",
+    "about", "contact", "privacy",
+    "terms", "owner", "admin"
+  ].includes(page);
 
   const renderPage = () => {
-    const props = { 
-      rooms: rooms, 
-      saved: savedIds, 
-      onSave, 
-      onNav, 
-      showToast, 
+    const props = {
+      rooms,
+      saved: savedIds,
+      onSave,
+      onNav,
+      showToast,
       onBack,
       search: globalSearch,
       setSearch: setGlobalSearch,
@@ -171,9 +171,9 @@ export default function App() {
       maintenanceRequests,
       setMaintenanceRequests
     };
-    
+
     switch (page) {
-      case "home": return <MapPage {...props} />;
+      case "home": return <RoomsPage {...props} />;
       case "rooms": return <RoomsPage {...props} />;
       case "saved": return <RoomsPage {...props} rooms={rooms.filter(r => savedIds.has(r.id))} />;
       case "owner": return <OwnerPage {...props} />;
@@ -193,7 +193,7 @@ export default function App() {
       case "contact": return <ContactUsPage onBack={onBack} showToast={showToast} />;
       case "privacy": return <PrivacyPolicyPage onBack={onBack} />;
       case "terms": return <TermsPage onBack={onBack} />;
-      default: return <MapPage {...props} />;
+      default: return <RoomsPage {...props} />;
     }
   };
 
@@ -207,10 +207,10 @@ export default function App() {
           {renderPage()}
         </div>
         {!isSubPage && (
-          <BottomNav 
-            activeTab={activeTab} 
-            setActiveTab={(t) => { setActiveTab(t); setPage(t); }} 
-            savedCount={savedIds.size} 
+          <BottomNav
+            activeTab={activeTab}
+            setActiveTab={(t) => { setActiveTab(t); setPage(t); }}
+            savedCount={savedIds.size}
           />
         )}
       </div>
