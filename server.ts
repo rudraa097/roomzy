@@ -16,9 +16,7 @@ function getStripe(): Stripe {
   if (!stripeClient) {
     const key = process.env.STRIPE_SECRET_KEY;
     if (!key) {
-      throw new Error(
-        "STRIPE_SECRET_KEY is missing. Please add it to your environment variables or .env file."
-      );
+      throw new Error("STRIPE_SECRET_KEY is missing");
     }
     stripeClient = new Stripe(key);
   }
@@ -32,19 +30,18 @@ async function startServer() {
 
   app.use(express.json());
 
-  // Health check endpoint (required by Render)
+  // Health check
   app.get("/health", (_req, res) => {
     res.status(200).json({ status: "ok" });
   });
 
-  // Stripe Checkout Session
+  // Stripe API
   app.post("/api/create-checkout-session", async (req, res) => {
     try {
       const { roomId, roomTitle, amount, type } = req.body;
 
       if (!roomId || !roomTitle || !amount || !type) {
-        res.status(400).json({ error: "Missing required fields" });
-        return;
+        return res.status(400).json({ error: "Missing required fields" });
       }
 
       const stripe = getStripe();
@@ -58,9 +55,9 @@ async function startServer() {
               currency: "inr",
               product_data: {
                 name: `${type}: ${roomTitle}`,
-                description: `Payment for Room ID: ${roomId}`,
+                description: `Room ID: ${roomId}`,
               },
-              unit_amount: Math.round(amount * 100), // paise, must be integer
+              unit_amount: Math.round(amount * 100),
             },
             quantity: 1,
           },
@@ -78,13 +75,18 @@ async function startServer() {
   });
 
   if (isProduction) {
-    // Serve built static files
-    const distPath = path.join(process.cwd(), "dist");
-    app.get("/", (req, res) => {
-  res.send("Roomzy API running 🚀");
-});
+    // ✅ SERVE FRONTEND (IMPORTANT FIX)
+    const distPath = path.join(__dirname, "dist");
+
+    app.use(express.static(distPath));
+
+    // SPA fallback (VERY IMPORTANT)
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+
   } else {
-    // Vite dev middleware
+    // Dev mode with Vite
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -94,7 +96,7 @@ async function startServer() {
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log(
-      `🏠 Roomzy server running in ${isProduction ? "production" : "development"} mode on http://localhost:${PORT}`
+      `🚀 Server running in ${isProduction ? "production" : "development"} mode on port ${PORT}`
     );
   });
 }
