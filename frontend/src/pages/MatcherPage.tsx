@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Room } from '../types';
 import { ChevronLeft, Sparkles, ChevronRight, RotateCcw, MessageCircle, ShieldCheck, Lock } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Stars } from '../components/Stars';
 
 interface MatcherPageProps {
