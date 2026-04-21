@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, CheckCircle2, Circle } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface ChecklistPageProps {
   onBack: () => void;
