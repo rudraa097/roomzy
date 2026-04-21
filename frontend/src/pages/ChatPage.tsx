@@ -3,7 +3,7 @@ import { Room, ChatMessage } from '../types';
 import { CHAT_MSGS } from '../constants';
 import { ChevronLeft, Video, Phone, Send, Image as ImageIcon, Languages, Check, CheckCheck } from 'lucide-react';
 import { Tag } from '../components/Tag';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface ChatPageProps {
   room: Room | null;
