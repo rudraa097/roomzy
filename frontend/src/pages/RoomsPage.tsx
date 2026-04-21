@@ -5,7 +5,7 @@ import { RoomCard } from '../components/RoomCard';
 import { Tag } from '../components/Tag';
 import { Modal } from '../components/Modal';
 import { Search, Filter, Sparkles, Handshake, ChevronDown, X, PlusCircle, Check, Info, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface RoomsPageProps {
   rooms: Room[];
