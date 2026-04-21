@@ -1,7 +1,12 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-// Use VITE_GEMINI_API_KEY — exposed safely via Vite's import.meta.env
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || "" });
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!apiKey) {
+  throw new Error("Missing Gemini API Key");
+}
+
+const ai = new GoogleGenAI({ apiKey });
 
 export const optimizeListing = async (details: {
   title: string;
@@ -12,16 +17,13 @@ export const optimizeListing = async (details: {
 }) => {
   try {
     const prompt = `Optimize this rental listing for a mobile app called Roomzy (India market). 
-    Make it catchy, professional, and optimized for search ranking.
-    
-    Current Details:
-    Title: ${details.title}
-    Address: ${details.address}
-    Rent: ₹${details.rent}
-    Amenities: ${details.amenities.join(", ")}
-    Type: ${details.type}
-    
-    Provide a new catchy title and a detailed description that highlights the benefits.`;
+Make it catchy, professional, and optimized for search ranking.
+
+Title: ${details.title}
+Address: ${details.address}
+Rent: ₹${details.rent}
+Amenities: ${details.amenities.join(", ")}
+Type: ${details.type}`;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
@@ -33,10 +35,7 @@ export const optimizeListing = async (details: {
           properties: {
             optimizedTitle: { type: Type.STRING },
             optimizedDescription: { type: Type.STRING },
-            suggestedRent: {
-              type: Type.NUMBER,
-              description: "Suggested fair market rent based on details",
-            },
+            suggestedRent: { type: Type.NUMBER },
           },
           required: ["optimizedTitle", "optimizedDescription", "suggestedRent"],
         },
