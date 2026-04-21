@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, MapPin, Coffee, Dumbbell, Train, Trees, CheckCircle2 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface NeighbourhoodPageProps {
   onBack: () => void;
