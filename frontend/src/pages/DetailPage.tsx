@@ -10,7 +10,7 @@ import {
   Clock, Shield, Building2, TrainFront, School, Hospital, Trees, ShoppingBag, Store,
   Lock
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { createCheckoutSession } from '../services/api';
 import { calculateSafetyScore } from '../lib/safetyScore';
 
