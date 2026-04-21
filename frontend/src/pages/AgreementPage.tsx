@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, FileCheck, Download, Send, RotateCcw } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface AgreementPageProps {
   onBack: () => void;
