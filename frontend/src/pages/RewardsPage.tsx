@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, Gift, Copy, Check, Lock } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Tag } from '../components/Tag';
 
 interface RewardsPageProps {
