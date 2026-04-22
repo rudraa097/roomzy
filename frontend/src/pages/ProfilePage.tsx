@@ -1161,3 +1161,4 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
     </div>
   );
 };
+export default ProfilePage;
