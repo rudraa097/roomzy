@@ -660,3 +660,4 @@ export const RoomsPage: React.FC<RoomsPageProps> = ({
     </div>
   );
 };
+export default RoomsPage;
