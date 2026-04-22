@@ -79,3 +79,4 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ onBack }) => {
     </div>
   );
 };
+export default AboutUsPage;
